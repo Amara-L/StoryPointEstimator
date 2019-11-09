@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="001" author="a.temnikova">
+        <createSequence sequenceName="test_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+    <changeSet id="002" author="a.temnikova">
+        <createTable tableName="test">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar2(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003" author="a.temnikova">
+        <insert tableName="test">
+            <column name="id" value="0"/>
+            <column name="name" value="Pierre" />
+        </insert>
+        <insert tableName="test">
+            <column name="id" value="1"/>
+            <column name="name" value="Jana" />
+        </insert>
+        <insert tableName="test">
+            <column name="id" value="2"/>
+            <column name="name" value="Andreas" />
+        </insert>
+        <insert tableName="test">
+            <column name="id" value="3"/>
+            <column name="name" value="Nikolai" />
+        </insert>
+        <insert tableName="test">
+            <column name="id" value="4"/>
+            <column name="name" value="Angelina" />
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

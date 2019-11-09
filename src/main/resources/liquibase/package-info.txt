@@ -1,0 +1,4 @@
+
+This directory contains settings liquibase.
+
+Database connection and scripts for database migration.
