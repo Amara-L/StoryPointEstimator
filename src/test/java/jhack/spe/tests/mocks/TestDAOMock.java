@@ -8,11 +8,21 @@ import java.util.List;
 
 /**
  * Mock-object TestDAO. This object replaces the database connection.
+ *
+ * @author FirstName S. LastName
+ * @version 1.0.0 created 09.11.2019
  */
 public class TestDAOMock implements TestDAO {
 
+    /**
+     * Emulation database.
+     */
     private List<TestEntity> users;
 
+    /**
+     * Constructor.
+     * Initial data in the list users.
+     */
     public TestDAOMock() {
         users = new ArrayList<>();
 
