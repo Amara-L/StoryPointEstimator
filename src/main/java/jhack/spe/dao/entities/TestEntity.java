@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity  // <--- annotation indicating entity
 @Table(name = "test")  // <--- annotation indicating table by name table
-public class TestEntity implements StoryPointEstimatorEntity {
+public class TestEntity {
 
     /**
      * Variable id.
