@@ -2,6 +2,8 @@ package jhack.spe.controllers;
 
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Interface authorization controller.
  */
@@ -12,7 +14,7 @@ public interface AuthorizationController {
      *
      * @return name jsp-file
      */
-    String getLoginForm();
+    String getLoginForm(HttpSession session, Model model);
 
     /**
      * Send authorization data to the server.
@@ -22,14 +24,14 @@ public interface AuthorizationController {
      * @param password user password
      * @return name jsp-file
      */
-    String postLoginForm(Model model, String login, String password);
+    String postLoginForm(HttpSession session, Model model, String login, String password);
 
     /**
      * Open the restore password page.
      *
      * @return name jsp-file
      */
-    String getRestorePasswordForm();
+    String getRestorePasswordForm(HttpSession session);
 
     /**
      * Send new password on mail.
@@ -38,6 +40,13 @@ public interface AuthorizationController {
      * @param mail user e-mail
      * @return name jsp-file
      */
-    String postRestorePasswordForm(Model model, String mail);
+    String postRestorePasswordForm(HttpSession session, Model model, String mail);
+
+    /**
+     * Log out of account.
+     *
+     * @return name jsp-file
+     */
+    String getExit(HttpSession session);
 
 }

@@ -1,13 +1,24 @@
 package jhack.spe.controllers;
 
+import jhack.spe.controllers.dto.User;
+import jhack.spe.services.AuthorizationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Authorization controller.
  */
 @Controller
+@RequestMapping("/authorization")
 public class AuthorizationControllerImp implements AuthorizationController {
+
+    @Autowired
+    private AuthorizationService authorizationService;
 
     /**
      * Open the authorization page.
@@ -15,8 +26,18 @@ public class AuthorizationControllerImp implements AuthorizationController {
      * @return name jsp-file
      */
     @Override
-    public String getLoginForm() {
-        return null;
+    @RequestMapping( value = {"/login"}, method = RequestMethod.GET)
+    public String getLoginForm(HttpSession session, Model model) {
+
+        if (session.getAttribute("userId") != null) {
+
+            model.addAttribute("userName", session.getAttribute("userName"));
+
+            return "main";
+
+        } else {
+            return "login";
+        }
     }
 
     /**
@@ -28,8 +49,18 @@ public class AuthorizationControllerImp implements AuthorizationController {
      * @return name jsp-file
      */
     @Override
-    public String postLoginForm(Model model, String login, String password) {
-        return null;
+    @RequestMapping( value = {"/login"}, method = RequestMethod.POST)
+    public String postLoginForm(HttpSession session, Model model, String login, String password) {
+
+        User user = authorizationService.loginUser(login, password);
+
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("userName", user.getName());
+
+        model.addAttribute("userName", user.getName());
+
+        return "main";
+
     }
 
     /**
@@ -38,8 +69,9 @@ public class AuthorizationControllerImp implements AuthorizationController {
      * @return name jsp-file
      */
     @Override
-    public String getRestorePasswordForm() {
-        return null;
+    @RequestMapping( value = {"/restorepass"}, method = RequestMethod.GET)
+    public String getRestorePasswordForm(HttpSession session) {
+        return "restorePassword";
     }
 
     /**
@@ -50,8 +82,30 @@ public class AuthorizationControllerImp implements AuthorizationController {
      * @return name jsp-file
      */
     @Override
-    public String postRestorePasswordForm(Model model, String mail) {
-        return null;
+    @RequestMapping( value = {"/restorepass"}, method = RequestMethod.POST)
+    public String postRestorePasswordForm(HttpSession session, Model model, String mail) {
+
+        authorizationService.sendNewPassword(mail);
+
+        return "login";
+
+    }
+
+    /**
+     * Log out of account.
+     *
+     * @param session
+     * @return name jsp-file
+     */
+    @RequestMapping( value = {"/exit"}, method = RequestMethod.GET)
+    @Override
+    public String getExit(HttpSession session) {
+
+        session.removeAttribute("userId");
+        session.removeAttribute("userName");
+
+        return "login";
+
     }
 
 }

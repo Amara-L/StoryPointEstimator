@@ -1,2 +1,0 @@
-
-This directory contains all files for front-end.

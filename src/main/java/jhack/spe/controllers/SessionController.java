@@ -1,5 +1,9 @@
 package jhack.spe.controllers;
 
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpSession;
+
 /**
  * Interface session controller.
  */
@@ -10,7 +14,7 @@ public interface SessionController {
      *
      * @return name jsp-file
      */
-    String getJoinToSession();
+    String getJoinToSession(HttpSession session);
 
     /**
      * Join the session (go to the session page).
@@ -18,7 +22,7 @@ public interface SessionController {
      * @param sessionId id session
      * @return name jsp-file
      */
-    String postJoinToSession(String sessionId);
+    String postJoinToSession(HttpSession session, Model model, String sessionId);
 
     /**
      * Open the session page.
@@ -26,16 +30,16 @@ public interface SessionController {
      * @param sessionId id session
      * @return name jsp-file
      */
-    String openSession(String sessionId);
+    String openSession(HttpSession session, Model model, String sessionId);
 
     /**
      * Send estimate to the server.
      *
      * @param sessionId id session
-     * @param resultEstimate result estimate
+     * @param estimate result estimate
      * @return name jsp-file
      */
-    String sendEstimate(String sessionId, Integer resultEstimate);
+    String sendEstimate(HttpSession session, Model model, String sessionId, Integer estimate);
 
     /**
      * Open the control session page.
@@ -43,7 +47,7 @@ public interface SessionController {
      * @param sessionId id session
      * @return name jsp-file
      */
-    String openControlSessionPage(String sessionId);
+    String openControlSessionPage(HttpSession session, Model model, String sessionId);
 
     /**
      * Add member.
@@ -52,7 +56,7 @@ public interface SessionController {
      * @param mail mail new member
      * @return name jsp-file
      */
-    String addMember(String sessionId, String mail);
+    String addMember(HttpSession session, Model model, String sessionId, String mail);
 
     /**
      * Close session.
@@ -60,14 +64,14 @@ public interface SessionController {
      * @param sessionId id session
      * @return name jsp-file
      */
-    String closeSession(String sessionId);
+    String closeSession(HttpSession session, Model model, String sessionId);
 
     /**
      * Open the create session page.
      *
      * @return name jsp-file
      */
-    String getCreateSession();
+    String getCreateSession(HttpSession session, Model model);
 
     /**
      * Create session (go to the session page).
@@ -75,6 +79,6 @@ public interface SessionController {
      * @param storyPointId id story point
      * @return name jsp-file
      */
-    String postCreateSession(String storyPointId);
+    String postCreateSession(HttpSession session, Model model, String storyPointId);
 
 }
