@@ -1,6 +1,6 @@
 package jhack.spe.dao;
 
-import jhack.spe.dao.entities.TestEntity;
+import jhack.spe.entities.TestEntity;
 
 /**
  * Description interface

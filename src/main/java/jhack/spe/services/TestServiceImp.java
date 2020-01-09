@@ -1,7 +1,7 @@
 package jhack.spe.services;
 
 import jhack.spe.dao.TestDAO;
-import jhack.spe.dao.entities.TestEntity;
+import jhack.spe.entities.TestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

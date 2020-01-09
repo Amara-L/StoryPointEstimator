@@ -1,4 +1,4 @@
-package jhack.spe.dao.entities;
+package jhack.spe.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +12,8 @@ import javax.persistence.*;
  * @version 1.0.0 created 09.11.2019
  */
 @Entity  // <--- annotation indicating entity
-@Table(name = "test")  // <--- annotation indicating table by name table
-public class TestEntity implements StoryPointEstimatorEntity {
+@Table(name = "test", schema = "spe")  // <--- annotation indicating table by name table
+public class TestEntity {
 
     /**
      * Variable id.

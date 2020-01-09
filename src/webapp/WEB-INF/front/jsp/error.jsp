@@ -3,7 +3,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Get Name</title>
+    <title> Error </title>
+    <style><%@include file="/WEB-INF/front/jsp/css/style.css"%></style>
 </head>
 <body>
 	<header>	
@@ -15,18 +16,8 @@
     		</tr>
 		</table>
 	</header>
-<p>Name user: ${name}</p>
-<br>
-
-<form name="getUser" method="post" action="/spe/test/user">
-
-    <p>User id:<Br>
-        <input type="number" name="id">
-
-    <p><input type="submit" value="Отправить">
-        <input type="reset" value="Очистить"></p>
-</form>
-
-
+<div>
+    <p><b><k> We are very sorry. An error has occurred: ${errorMessage}  </k></b></p>
+</div>
 </body>
 </html>

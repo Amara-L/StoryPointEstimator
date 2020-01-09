@@ -2,8 +2,8 @@
 <Context path="/spe/" crossContext="true" reloadable="true">
 
     <Resource name="jdbc/PostgreSQLDataBase" auth="Container" type="javax.sql.DataSource"
-              username="postgres" password="postgres"
-              url="jdbc:postgresql://192.168.56.101:5432/post"
+              username="spe" password="spe"
+              url="jdbc:postgresql://192.168.56.101:5432/post?currentSchema=spe"
               driverClassName="org.postgresql.Driver"
     />
 

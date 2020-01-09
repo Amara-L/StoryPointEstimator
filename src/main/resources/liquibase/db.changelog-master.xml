@@ -6,5 +6,6 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <include file="liquibase/test-initial.xml"/>
+    <include file="liquibase/20191207-create-schema.xml"/>
 
 </databaseChangeLog>

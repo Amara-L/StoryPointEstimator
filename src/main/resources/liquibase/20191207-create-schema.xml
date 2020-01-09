@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <!--    <changeSet id="20191207-1" author="a.temnikova">-->
+    <!--        <sql>-->
+    <!--            CREATE USER ${schemaName} WITH PASSWORD '${passwordUser}';-->
+    <!--        </sql>-->
+    <!--    </changeSet>-->
+
+    <!--    <changeSet id="20191207-2" author="a.temnikova">-->
+    <!--        <sql>-->
+    <!--            CREATE SCHEMA ${schemaName} AUTHORIZATION ${schemaName};-->
+    <!--        </sql>-->
+    <!--    </changeSet>-->
+
+    <changeSet id="20191207-3" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <sequenceExists sequenceName="estimation_seq" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createSequence sequenceName="estimation_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+    <changeSet id="20191207-4" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <sequenceExists sequenceName="session_seq" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createSequence sequenceName="session_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+    <changeSet id="20191207-5" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <sequenceExists sequenceName="story_point_seq" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createSequence sequenceName="story_point_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+    <changeSet id="20191207-6" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <sequenceExists sequenceName="team_member_seq" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createSequence sequenceName="team_member_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+    <changeSet id="20191207-7" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <sequenceExists sequenceName="user_seq" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createSequence sequenceName="user_seq" incrementBy="1" minValue="1" startValue="1" />
+    </changeSet>
+
+
+    <changeSet id="20191207-8" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="user" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createTable tableName="user_spe">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(32)">
+                <constraints nullable="false" />
+            </column>
+            <column name="login" type="varchar(32)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="20191207-9" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="story_point" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createTable tableName="story_point">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(32)">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20191207-10" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="session" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createTable tableName="session">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="story_point_id" type="int">
+                <constraints nullable="false" foreignKeyName="story_point_id_key" references="story_point" />
+            </column>
+            <column name="creator_id" type="int">
+                <constraints nullable="false" foreignKeyName="creator_id_key" references="user_spe" />
+            </column>
+            <column name="process" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="final_result" type="int" />
+            <column name="closed_at" type="timestamp" />
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20191207-11" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="team_member" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createTable tableName="team_member">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="session_id" type="int">
+                <constraints nullable="false" foreignKeyName="session_id_key" references="session" />
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="user_id_key" references="user_spe" />
+            </column>
+            <column name="join_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="active" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20191207-12" author="a.temnikova">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="estimation" />-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <createTable tableName="estimation">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="result" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="team_member_id" type="int">
+                <constraints nullable="false" foreignKeyName="team_member_id_key" references="team_member" />
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20191207-13" author="a.temnikova" runOnChange="true">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION change_create_time() RETURNS trigger
+            LANGUAGE plpgsql AS $$
+            BEGIN
+            NEW.created_at := CURRENT_TIMESTAMP;
+            RETURN NEW;
+            END;
+            $$;
+        </createProcedure>
+    </changeSet>
+
+    <changeSet id="20191207-14" author="a.temnikova" runOnChange="true">
+        <createProcedure>
+            CREATE OR REPLACE FUNCTION change_update_time() RETURNS trigger
+            LANGUAGE plpgsql AS $$
+            BEGIN
+            NEW.updated_at := CURRENT_TIMESTAMP;
+            RETURN NEW;
+            END;
+            $$;
+        </createProcedure>
+    </changeSet>
+
+    <changeSet id="20191207-15" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_created_at_story_point';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_created_at_story_point BEFORE INSERT ON story_point FOR EACH ROW EXECUTE PROCEDURE change_create_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-16" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_created_at_user';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_created_at_user BEFORE INSERT ON user_spe FOR EACH ROW EXECUTE PROCEDURE change_create_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-17" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_created_at_session';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_created_at_session BEFORE INSERT ON session FOR EACH ROW EXECUTE PROCEDURE change_create_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-18" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_created_at_team_member';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_created_at_team_member BEFORE INSERT ON team_member FOR EACH ROW EXECUTE PROCEDURE change_create_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-19" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_created_at_estimation';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_created_at_estimation BEFORE INSERT ON estimation FOR EACH ROW EXECUTE PROCEDURE change_create_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-20" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_updated_at_user';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_updated_at_user BEFORE UPDATE ON user_spe FOR EACH ROW EXECUTE PROCEDURE change_update_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-21" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_updated_at_session';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_updated_at_session BEFORE UPDATE ON session FOR EACH ROW EXECUTE PROCEDURE change_update_time();
+        </sql>
+    </changeSet>
+
+    <changeSet id="20191207-22" author="a.temnikova" runOnChange="true">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <sqlCheck expectedResult="0">-->
+        <!--                SELECT count(*) FROM pg_trigger WHERE tgname='init_updated_at_team_member';-->
+        <!--            </sqlCheck>-->
+        <!--        </preConditions>-->
+        <sql>
+            CREATE TRIGGER init_updated_at_team_member BEFORE UPDATE ON team_member FOR EACH ROW EXECUTE PROCEDURE change_update_time();
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

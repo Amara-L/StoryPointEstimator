@@ -3,30 +3,21 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Get Name</title>
+    <title> Well </title>
+    <style><%@include file="/WEB-INF/front/jsp/css/style.css"%></style>
 </head>
 <body>
 	<header>	
 		<table>
     		<tr>
 			<td><b><m> Story point estimation </m></b></td>
-			<td></td>
+			<td><a href="/spe/authorization/login"><b><m> Main page </m></b></a></td>
 			<td><a href="/spe/authorization/exit"><b><m> Go out </m></b></a></td>
     		</tr>
 		</table>
 	</header>
-<p>Name user: ${name}</p>
-<br>
-
-<form name="getUser" method="post" action="/spe/test/user">
-
-    <p>User id:<Br>
-        <input type="number" name="id">
-
-    <p><input type="submit" value="Отправить">
-        <input type="reset" value="Очистить"></p>
-</form>
-
-
+<div>
+    <p><b><k> ${message}  </k></b></p>
+</div>
 </body>
 </html>

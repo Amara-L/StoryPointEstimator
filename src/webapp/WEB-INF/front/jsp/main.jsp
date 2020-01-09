@@ -3,7 +3,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Get Name</title>
+    <title> Main page </title>
+    <style><%@include file="/WEB-INF/front/jsp/css/style.css"%></style>
 </head>
 <body>
 	<header>	
@@ -15,18 +16,11 @@
     		</tr>
 		</table>
 	</header>
-<p>Name user: ${name}</p>
-<br>
-
-<form name="getUser" method="post" action="/spe/test/user">
-
-    <p>User id:<Br>
-        <input type="number" name="id">
-
-    <p><input type="submit" value="Отправить">
-        <input type="reset" value="Очистить"></p>
-</form>
-
-
+<div>
+    <p><b><k> Hello ${userName} ! </k></b></p>
+    <p>You can:</p>
+    <p><a href="/spe/session/create"><k> Create estimate session </k></a></p>
+    <p><a href="/spe/session/join"><k> Join to estimate session </k></a></p>
+</div>
 </body>
 </html>

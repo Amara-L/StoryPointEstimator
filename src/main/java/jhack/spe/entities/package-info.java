@@ -5,4 +5,4 @@
  *
  * All objects must implement a marker interface StoryPointEstimatorEntity. (!!!Do not delete!!!)
  */
-package jhack.spe.dao.entities;
+package jhack.spe.entities;

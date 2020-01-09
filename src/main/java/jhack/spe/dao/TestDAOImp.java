@@ -1,6 +1,6 @@
 package jhack.spe.dao;
 
-import jhack.spe.dao.entities.TestEntity;
+import jhack.spe.entities.TestEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Session;

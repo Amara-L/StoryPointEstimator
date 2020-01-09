@@ -1,7 +1,7 @@
 package jhack.spe.tests.mocks;
 
 import jhack.spe.dao.TestDAO;
-import jhack.spe.dao.entities.TestEntity;
+import jhack.spe.entities.TestEntity;
 
 import java.util.ArrayList;
 import java.util.List;
